@@ -6,7 +6,7 @@ sequenceDiagram
     alt Booking Ended
         create participant Review
         Booking->>Review: create_review(booking, rating, comment)
-        Review->>User:Review created
+        Review-->>User:Review created
     else Booking not ended
-        Booking->>User: Can't post review for this booking
+        Booking-->>User: Can't post review for this booking
     end
