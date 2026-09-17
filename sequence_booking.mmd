@@ -1,0 +1,12 @@
+sequenceDiagram
+    actor Host
+    participant Booking
+
+    Booking->>Host: accept_or_reject(booking, decision)
+    alt Host approves
+        Host->>Booking: accept_or_reject(booking, action)
+        Booking-->>Host: True
+    else Host rejects
+        Host->>Booking: accept_or_reject(booking, action)
+        Booking-->>Host: False
+    end

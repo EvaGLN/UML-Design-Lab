@@ -1,0 +1,12 @@
+sequenceDiagram
+    actor User
+    participant Booking
+
+    User->>User: leave_review(booking, rating, comment)
+    alt Booking Ended
+        create participant Review
+        User->>Review: create_review(booking, rating, comment)
+        Review->>User:Review created
+    else Booking not ended
+        Booking->>User:Review created
+    end

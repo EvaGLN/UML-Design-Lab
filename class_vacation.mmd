@@ -1,0 +1,54 @@
+classDiagram
+    class User {
+        -id: int
+        +name: str
+        +email: str
+        +browse_available_properties()
+        +request_booking(property, startDate, endDate)
+        +leave_review(booking, rating, comment)
+    }
+
+    class Host {
+        +properties: list
+        +list_property()
+        +manage_property_detail(property, action)
+        +add_or_remove()
+        +accept_or_reject(booking, decision)
+    }
+
+    class Property {
+        -id: int
+        +title: str
+        +price: float
+        +amenities: list
+        +manage_amenity(amenity, action)
+        +check_availability(startDate, endDate) bool
+    }
+
+    class Amenity {
+        -id: int
+        +name: str
+    }
+
+    class Booking {
+        -id: int
+        +startDate: date
+        +endDate: date
+        +status: str
+        +accept_or_reject(booking, action)
+        +create(user, property, startDate, endDate)
+    }
+
+    class Review {
+        -id: int
+        +rating: int
+        +comment: str
+        +create_review(booking, rating, comment)
+    }
+
+    User "1" -- "0..1" Host : can be
+    Host "1" *-- "0..*" Property : owns
+    Property "1" o-- "0..*" Amenity : includes
+    User "1" -- "0..*" Booking : makes
+    Property "1" -- "0..*" Booking : booked as
+    Booking "1" -- "0..1" Review : reviewed by

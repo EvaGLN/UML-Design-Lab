@@ -1,0 +1,15 @@
+sequenceDiagram
+    actor User
+    participant Property
+
+
+    User->>User: request_booking(property, startDate, endDate)
+    User->>Property: check_availability(startDate, endDate)
+    alt Dates available
+        Property-->>User: True
+        create participant Booking
+        User->>Booking: create(user, property, startDate, endDate)
+        Booking-->>User: Booking request created
+    else Dates unavailable
+        Property-->>User: False
+    end
